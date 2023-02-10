@@ -1,9 +1,9 @@
 app:
-  title: Scaffolded Backstage App
+  title: Landscape IDP
   baseUrl: http://localhost:3000
 
 organization:
-  name: My Company
+  name: PortalNOW
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -28,8 +28,19 @@ backend:
   # This is for local development only, it is not recommended to use this in production
   # The production database configuration is stored in app-config.production.yaml
   database:
-    client: better-sqlite3
-    connection: ':memory:'
+    # config options: https://node-postgres.com/apis/client
+    client: pg
+    connection:
+      host: 0.0.0.0
+      port: 5432
+      user: postgres
+      password: postgres
+      database: postgres
+    pluginDivisionMode: schema
+        # https://node-postgres.com/features/ssl
+        #ssl: require # see https://www.postgresql.org/docs/current/libpq-ssl.html Table 33.1. SSL Mode Descriptions (e.g. require)
+        #ca: # if you have a CA file and want to verify it you can uncomment this section
+      #$file: <file-path>/ca/server.crtZ
   cache:
     store: memory
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
