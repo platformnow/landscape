@@ -2,7 +2,13 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-This is your newly scaffolded Backstage App, Good Luck!
+Internal Developer Portal for PlatformNow built on Backstage
+
+Start the database in docker
+
+```sh
+make db
+```
 
 To start the app, run:
 
