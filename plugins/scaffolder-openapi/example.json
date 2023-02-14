@@ -1,0 +1,337 @@
+{
+    "apiVersion": "apiextensions.k8s.io/v1",
+    "kind": "CustomResourceDefinition",
+    "metadata": {
+        "creationTimestamp": "2023-02-08T17:17:25Z",
+        "generation": 1,
+        "name": "backups.services.777software.com",
+        "ownerReferences": [
+            {
+                "apiVersion": "apiextensions.crossplane.io/v1",
+                "blockOwnerDeletion": true,
+                "controller": true,
+                "kind": "CompositeResourceDefinition",
+                "name": "backups.services.777software.com",
+                "uid": "13c5fe86-60c4-4bce-871f-46d974762114"
+            }
+        ],
+        "resourceVersion": "4311",
+        "uid": "cec31cb3-4d65-4e1b-b58a-5d11362dc0c8"
+    },
+    "spec": {
+        "conversion": {
+            "strategy": "None"
+        },
+        "group": "services.777software.com",
+        "names": {
+            "categories": [
+                "composite"
+            ],
+            "kind": "BackUp",
+            "listKind": "BackUpList",
+            "plural": "backups",
+            "singular": "backup"
+        },
+        "scope": "Cluster",
+        "versions": [
+            {
+                "additionalPrinterColumns": [
+                    {
+                        "jsonPath": ".status.conditions[?(@.type=='Synced')].status",
+                        "name": "SYNCED",
+                        "type": "string"
+                    },
+                    {
+                        "jsonPath": ".status.conditions[?(@.type=='Ready')].status",
+                        "name": "READY",
+                        "type": "string"
+                    },
+                    {
+                        "jsonPath": ".spec.compositionRef.name",
+                        "name": "COMPOSITION",
+                        "type": "string"
+                    },
+                    {
+                        "jsonPath": ".metadata.creationTimestamp",
+                        "name": "AGE",
+                        "type": "date"
+                    }
+                ],
+                "name": "v1alpha1",
+                "schema": {
+                    "openAPIV3Schema": {
+                        "properties": {
+                            "apiVersion": {
+                                "type": "string"
+                            },
+                            "kind": {
+                                "type": "string"
+                            },
+                            "metadata": {
+                                "type": "object"
+                            },
+                            "spec": {
+                                "properties": {
+                                    "claimRef": {
+                                        "properties": {
+                                            "apiVersion": {
+                                                "type": "string"
+                                            },
+                                            "kind": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "namespace": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "apiVersion",
+                                            "kind",
+                                            "namespace",
+                                            "name"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "clusterName": {
+                                        "description": "The cluster name",
+                                        "type": "string"
+                                    },
+                                    "compositionRef": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "name"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "compositionRevisionRef": {
+                                        "description": "Alpha: This field may be deprecated or changed without notice.",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "name"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "compositionSelector": {
+                                        "properties": {
+                                            "matchLabels": {
+                                                "additionalProperties": {
+                                                    "type": "string"
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "required": [
+                                            "matchLabels"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "compositionUpdatePolicy": {
+                                        "default": "Automatic",
+                                        "description": "Alpha: This field may be deprecated or changed without notice.",
+                                        "enum": [
+                                            "Automatic",
+                                            "Manual"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "deletionPolicy": {
+                                        "default": "Delete",
+                                        "description": "DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either \"Delete\" or \"Orphan\" the external resource.",
+                                        "type": "string"
+                                    },
+                                    "location": {
+                                        "description": "The location for object storage",
+                                        "type": "string"
+                                    },
+                                    "projectID": {
+                                        "description": "The project ID.",
+                                        "type": "string"
+                                    },
+                                    "publishConnectionDetailsTo": {
+                                        "properties": {
+                                            "configRef": {
+                                                "default": {
+                                                    "name": "default"
+                                                },
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "metadata": {
+                                                "properties": {
+                                                    "annotations": {
+                                                        "additionalProperties": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "labels": {
+                                                        "additionalProperties": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "type": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "name"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "resourceRefs": {
+                                        "items": {
+                                            "properties": {
+                                                "apiVersion": {
+                                                    "type": "string"
+                                                },
+                                                "kind": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "apiVersion",
+                                                "kind"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "writeConnectionSecretToRef": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "namespace": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "name",
+                                            "namespace"
+                                        ],
+                                        "type": "object"
+                                    }
+                                },
+                                "required": [
+                                    "projectID",
+                                    "location",
+                                    "clusterName"
+                                ],
+                                "type": "object"
+                            },
+                            "status": {
+                                "properties": {
+                                    "conditions": {
+                                        "description": "Conditions of the resource.",
+                                        "items": {
+                                            "properties": {
+                                                "lastTransitionTime": {
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                },
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "reason": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "lastTransitionTime",
+                                                "reason",
+                                                "status",
+                                                "type"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "connectionDetails": {
+                                        "properties": {
+                                            "lastPublishedTime": {
+                                                "format": "date-time",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "required": [
+                            "spec"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "served": true,
+                "storage": true,
+                "subresources": {
+                    "status": {}
+                }
+            }
+        ]
+    },
+    "status": {
+        "acceptedNames": {
+            "categories": [
+                "composite"
+            ],
+            "kind": "BackUp",
+            "listKind": "BackUpList",
+            "plural": "backups",
+            "singular": "backup"
+        },
+        "conditions": [
+            {
+                "lastTransitionTime": "2023-02-08T17:17:26Z",
+                "message": "no conflicts found",
+                "reason": "NoConflicts",
+                "status": "True",
+                "type": "NamesAccepted"
+            },
+            {
+                "lastTransitionTime": "2023-02-08T17:17:26Z",
+                "message": "the initial names have been accepted",
+                "reason": "InitialNamesAccepted",
+                "status": "True",
+                "type": "Established"
+            }
+        ],
+        "storedVersions": [
+            "v1alpha1"
+        ]
+    }
+}

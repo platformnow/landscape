@@ -33,6 +33,8 @@ import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
+import { ScaffolderOpenapiPage } from '@internal/plugin-scaffolder-openapi';
+import {RBACRoot} from "@spotify/backstage-plugin-rbac";
 
 const app = createApp({
   apis,
@@ -91,6 +93,8 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
+    <Route path="/scaffolder-openapi" element={<ScaffolderOpenapiPage />} />
+    <Route path="/rbac" element={<RBACRoot />} />
   </FlatRoutes>
 );
 
