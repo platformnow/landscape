@@ -24,7 +24,7 @@ db:
 clean: rm-volume
 
 rm-volume:
-	docker volume rm landscape_db_landscape_data
+	docker volume rm landscape_db_data
 
 local-docker: docker-local-build-frontend docker-local-build-backend
 
