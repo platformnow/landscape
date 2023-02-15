@@ -7,7 +7,7 @@ import { Router } from 'express';
 import { PluginEnvironment } from '../types';
 
 export default async function createPlugin(
-  env: PluginEnvironment,
+    env: PluginEnvironment,
 ): Promise<Router> {
   return await createRouter({
     logger: env.logger,
@@ -38,18 +38,15 @@ export default async function createPlugin(
       github: providers.github.create({
         signIn: {
           resolver(_, ctx) {
-
-            const username = _.result.fullProfile.username;
-            console.log(username)
-
-            if (!username) {
-              throw new Error('User profile contained no username');
-            }
-
-            return ctx.signInWithCatalogUser({
-              entityRef: {name: username, kind: 'User', namespace: 'default'},
+            const userRef = 'user:default/guest'; // Must be a full entity reference
+            return ctx.issueToken({
+              claims: {
+                sub: userRef, // The user's own identity
+                ent: [userRef], // A list of identities that the user claims ownership through
+              },
             });
           },
+          // resolver: providers.github.resolvers.usernameMatchingUserEntityName(),
         },
       }),
     },
