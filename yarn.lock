@@ -2753,28 +2753,6 @@
   dependencies:
     "@backstage/backend-plugin-api" "^0.6.2"
 
-"@backstage/plugin-gcalendar@^0.3.17":
-  version "0.3.17"
-  resolved "https://registry.yarnpkg.com/@backstage/plugin-gcalendar/-/plugin-gcalendar-0.3.17.tgz#7826ef1b4438995190926ac847b44333b4602147"
-  integrity sha512-9S1qBkpK6dqgoPQ/kRBgs0ByS2ImxbmCd7xJYHJ9Gpgij7e14hxMdNuhZK8j3/o26g3DEwcXO3Ip9WLwcW2j/A==
-  dependencies:
-    "@backstage/core-components" "^0.13.4"
-    "@backstage/core-plugin-api" "^1.5.3"
-    "@backstage/errors" "^1.2.1"
-    "@backstage/theme" "^0.4.1"
-    "@material-ui/core" "^4.12.2"
-    "@material-ui/icons" "^4.9.1"
-    "@material-ui/lab" "4.0.0-alpha.61"
-    "@maxim_mazurok/gapi.client.calendar" "^3.0.20220408"
-    "@tanstack/react-query" "^4.1.3"
-    classnames "^2.3.1"
-    cross-fetch "^3.1.5"
-    dompurify "^2.3.6"
-    lodash "^4.17.21"
-    luxon "^3.0.0"
-    material-ui-popup-state "^1.9.3"
-    react-use "^17.2.4"
-
 "@backstage/plugin-github-actions@^0.6.4":
   version "0.6.4"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-github-actions/-/plugin-github-actions-0.6.4.tgz#f0029b59f7ab61a386a1ae5dbb9b183f552f1c26"
@@ -2831,26 +2809,6 @@
     react-resizable "^3.0.4"
     react-use "^17.2.4"
     zod "~3.21.4"
-
-"@backstage/plugin-microsoft-calendar@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@backstage/plugin-microsoft-calendar/-/plugin-microsoft-calendar-0.1.6.tgz#281db4b289a37b42ab07eeb91330f530eaf07a37"
-  integrity sha512-rurdTTFtBSou1qgnrPR2n2jVHn58yl1kBPFTSXAn7OEj/eXYZcKEb6vIs/0Faw6Aq6KOABKGub4Sc36nNK0YZw==
-  dependencies:
-    "@backstage/core-components" "^0.13.4"
-    "@backstage/core-plugin-api" "^1.5.3"
-    "@backstage/errors" "^1.2.1"
-    "@backstage/theme" "^0.4.1"
-    "@material-ui/core" "^4.12.2"
-    "@material-ui/icons" "^4.9.1"
-    "@microsoft/microsoft-graph-types" "^2.25.0"
-    "@tanstack/react-query" "^4.1.3"
-    classnames "^2.3.1"
-    dompurify "^2.3.6"
-    lodash "^4.17.21"
-    luxon "^3.0.0"
-    material-ui-popup-state "^1.9.3"
-    react-use "^17.2.4"
 
 "@backstage/plugin-org@^0.6.13":
   version "0.6.13"
@@ -3255,6 +3213,23 @@
     "@types/react" "^16.13.1 || ^17.0.0"
     qs "^6.9.4"
     react-use "^17.2.4"
+
+"@backstage/plugin-shortcuts@^0.3.13":
+  version "0.3.13"
+  resolved "https://registry.yarnpkg.com/@backstage/plugin-shortcuts/-/plugin-shortcuts-0.3.13.tgz#cb54f20156b2a78d228580cbfab12903f3d253dc"
+  integrity sha512-RhS/hVV1BiaQzp2/vgV0Y6j0pEPZ+DbSaFzCrXekfYgShkZzq7w52E9kouAasKdLIGhZjgy4DMdGxFDj1VfunQ==
+  dependencies:
+    "@backstage/core-components" "^0.13.4"
+    "@backstage/core-plugin-api" "^1.5.3"
+    "@backstage/theme" "^0.4.1"
+    "@backstage/types" "^1.1.0"
+    "@material-ui/core" "^4.12.2"
+    "@material-ui/icons" "^4.9.1"
+    "@material-ui/lab" "4.0.0-alpha.61"
+    react-hook-form "^7.12.2"
+    react-use "^17.2.4"
+    uuid "^8.3.2"
+    zen-observable "^0.10.0"
 
 "@backstage/plugin-tech-radar@^0.6.7":
   version "0.6.7"
@@ -5496,18 +5471,6 @@
     prop-types "^15.7.2"
     react-is "^16.8.0 || ^17.0.0"
 
-"@maxim_mazurok/gapi.client.calendar@^3.0.20220408":
-  version "3.0.20220805"
-  resolved "https://registry.yarnpkg.com/@maxim_mazurok/gapi.client.calendar/-/gapi.client.calendar-3.0.20220805.tgz#ccc3c12f83b361daf5e48e0a2ff7abee5b0a6c5d"
-  integrity sha512-YwUDC4G4amUkM4u55wJpARowbs6AjJoF+PxxLEz3ZoHXvzP/VWPb1L0AhxnbFwDhWKVFcXkZTEGDc59PcuIJjQ==
-  dependencies:
-    "@types/gapi.client" "*"
-
-"@microsoft/microsoft-graph-types@^2.25.0":
-  version "2.38.0"
-  resolved "https://registry.yarnpkg.com/@microsoft/microsoft-graph-types/-/microsoft-graph-types-2.38.0.tgz#abd61ba898b56eae6d6b3186ca9ac37541d3b92b"
-  integrity sha512-EXpTf/TFUb0EfBXiQ0rTmZf6fRgBn73lNfYdU2QKvqiMPQD/Cs2Gt+VmWVtK19F9Mf5Mt4bDTu5Ft0TGXOF8rA==
-
 "@mui/base@5.0.0-beta.13":
   version "5.0.0-beta.13"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-beta.13.tgz#3bae94c39752546d84a67d4ca73486b7c4923a89"
@@ -7367,19 +7330,6 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
-"@tanstack/query-core@4.33.0":
-  version "4.33.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.33.0.tgz#7756da9a75a424e521622b1d84eb55b7a2b33715"
-  integrity sha512-qYu73ptvnzRh6se2nyBIDHGBQvPY1XXl3yR769B7B6mIDD7s+EZhdlWHQ67JI6UOTFRaI7wupnTnwJ3gE0Mr/g==
-
-"@tanstack/react-query@^4.1.3":
-  version "4.33.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.33.0.tgz#e927b0343a6ecaa948fee59e9ca98fe561062638"
-  integrity sha512-97nGbmDK0/m0B86BdiXzx3EW9RcDYKpnyL2+WwyuLHEgpfThYAnXFaMMmnTDuAO4bQJXEhflumIEUfKmP7ESGA==
-  dependencies:
-    "@tanstack/query-core" "4.33.0"
-    use-sync-external-store "^1.2.0"
-
 "@testing-library/dom@^8.0.0":
   version "8.20.0"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-8.20.0.tgz#914aa862cef0f5e89b98cc48e3445c4c921010f6"
@@ -7652,11 +7602,6 @@
     "@types/express-serve-static-core" "^4.17.33"
     "@types/qs" "*"
     "@types/serve-static" "*"
-
-"@types/gapi.client@*":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@types/gapi.client/-/gapi.client-1.0.5.tgz#a6eb97e664fe51656c5b52258bd0afef28c76308"
-  integrity sha512-OTpbBMuzfC4lkvaomxqskI/iWRGW3zOZbDXZLNSyiuswTiSSGgILRLkg0POuZ4EgzEdaYaTlXpnXiCp07ri/Yw==
 
 "@types/glob@*":
   version "8.0.1"
@@ -7959,10 +7904,10 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
-"@types/react-dom@*", "@types/react-dom@<18.0.0":
-  version "17.0.18"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.18.tgz#8f7af38f5d9b42f79162eea7492e5a1caff70dc2"
-  integrity sha512-rLVtIfbwyur2iFKykP2w0pl/1unw26b5td16d5xMgp7/yjTHomkyxPYChFoCr/FtEX1lN9wY6lFj1qvKdS5kDw==
+"@types/react-dom@*", "@types/react-dom@<18.0.0", "@types/react-dom@^17":
+  version "17.0.20"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.20.tgz#e0c8901469d732b36d8473b40b679ad899da1b53"
+  integrity sha512-4pzIjSxDueZZ90F52mU3aPoogkHIoSIDG+oQ+wQK7Cy2B9S+MvOqY0uEA/qawKz381qrEDkvpwyt8Bm31I8sbA==
   dependencies:
     "@types/react" "^17"
 
@@ -8712,7 +8657,6 @@ anymatch@^3.0.3, anymatch@~3.1.2:
     "@backstage/plugin-catalog-graph" "^0.2.35"
     "@backstage/plugin-catalog-import" "^0.9.13"
     "@backstage/plugin-catalog-react" "^1.8.3"
-    "@backstage/plugin-gcalendar" "^0.3.17"
     "@backstage/plugin-github-actions" "^0.6.4"
     "@backstage/plugin-home" "^0.5.7"
     "@backstage/plugin-org" "^0.6.13"
@@ -8720,6 +8664,7 @@ anymatch@^3.0.3, anymatch@~3.1.2:
     "@backstage/plugin-scaffolder" "^1.14.4"
     "@backstage/plugin-search" "^1.3.6"
     "@backstage/plugin-search-react" "^1.6.4"
+    "@backstage/plugin-shortcuts" "^0.3.13"
     "@backstage/plugin-tech-radar" "^0.6.7"
     "@backstage/plugin-techdocs" "^1.6.8"
     "@backstage/plugin-techdocs-module-addons-contrib" "^1.0.18"
@@ -11413,11 +11358,6 @@ dompurify@^2.2.7, dompurify@^2.2.9:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.4.3.tgz#f4133af0e6a50297fc8874e2eaedc13a3c308c03"
   integrity sha512-q6QaLcakcRjebxjg8/+NP+h0rPfatOgOzc46Fst9VAA3jF2ApfKBNKMzdP4DYTqtUMXSCd5pRS/8Po/OmoCHZQ==
-
-dompurify@^2.3.6:
-  version "2.4.7"
-  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.4.7.tgz#277adeb40a2c84be2d42a8bcd45f582bfa4d0cfc"
-  integrity sha512-kxxKlPEDa6Nc5WJi+qRgPbOAbgTpSULL+vI3NUXsZMlkJxTqYI9wg5ZTay2sFrdZRWHPWNi+EdAhcJf81WtoMQ==
 
 domutils@^2.5.2, domutils@^2.8.0:
   version "2.8.0"

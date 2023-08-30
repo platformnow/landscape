@@ -27,6 +27,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import CategoryIcon from '@material-ui/icons/Category';
+import { Shortcuts } from '@backstage/plugin-shortcuts';
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -79,6 +80,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       </SidebarGroup>
       <SidebarSpace />
       <SidebarDivider />
+      <Shortcuts allowExternalLinks />
       <SidebarGroup
         label="Settings"
         icon={<UserSettingsSignInAvatar />}
