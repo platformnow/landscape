@@ -113,3 +113,14 @@ catalog:
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
     #   rules:
     #     - allow: [User, Group]
+
+devTools:
+  externalDependencies:
+    endpoints:
+      - name: 'Github'
+        type: 'fetch'
+        target: 'https://github.com'
+  info:
+    packagePrefixes:
+      - "@roadiehq/backstage-"
+      - "@spotify/backstage-"

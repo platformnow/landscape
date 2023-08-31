@@ -8,6 +8,8 @@ FROM --platform=$BUILD_PLATFORM node:16-bullseye-slim AS packages
 WORKDIR /app
 COPY package.json yarn.lock ./
 
+COPY backstage.json ./
+
 COPY packages packages
 
 # Comment this out if you don't have any internal plugins
