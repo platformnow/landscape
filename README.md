@@ -18,6 +18,21 @@ yarn install
 yarn dev
 ```
 
+## Docker Build
+
+Build and run the docker images locally for development
+
+```sh
+# Build the backend
+docker build -t landscape-backend -f Dockerfile.backend-buildsteps .
+
+# Build the backend
+docker build -t landscape-frontend -f Dockerfile.frontend-buildsteps .
+
+# Run the database, frontend and backend
+docker-compose up
+```
+
 ## License
 
 <!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->

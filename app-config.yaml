@@ -120,7 +120,7 @@ devTools:
       - name: 'Github'
         type: 'fetch'
         target: 'https://github.com'
-  info:
-    packagePrefixes:
-      - "@roadiehq/backstage-"
-      - "@spotify/backstage-"
+#  info:
+#    packagePrefixes:
+#      - "@roadiehq/backstage-"
+#      - "@spotify/backstage-"

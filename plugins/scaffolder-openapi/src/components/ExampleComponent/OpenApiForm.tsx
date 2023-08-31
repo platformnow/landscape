@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Form from "@rjsf/core";
-import validator from '@rjsf/validator-ajv8';
+
 
 interface Props {
     openApiSchema: any;
@@ -21,7 +21,7 @@ const OpenApiForm: React.FC<Props> = ({ openApiSchema }) => {
     }
 
 
-    return <Form schema={jsonSchema} validator={validator} />;
+    return <Form schema={jsonSchema} />;
 };
 
 export default OpenApiForm;

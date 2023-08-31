@@ -1,6 +1,5 @@
 version: '3'
 services:
-
   db:
     image: docker.io/bitnami/postgresql:12
     volumes:
@@ -11,13 +10,10 @@ services:
       - POSTGRESQL_DATABASE=postgres
     ports:
       - "5432:5432"
-
-  landscape-backend:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend-buildsteps
-      args:
-        BUILD_PLATFORM: linux/arm64
+    networks:
+        - landscape-network
+  backend:
+    image: landscape-backend:latest
     restart: always
     ports:
       - "7007:7007"
@@ -26,20 +22,19 @@ services:
       - POSTGRES_PORT=5432
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-
-  landscape-frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend-buildsteps
-      args:
-        BUILD_PLATFORM: linux/arm64
-        APP_CONFIG_FILE: app-config.yaml
+    networks:
+      - landscape-network
+  frontend:
+    image: landscape-frontend:latest
     restart: always
     ports:
       - "3000:80"
     environment:
-      - BACKEND_URL=landscape-backend
-
+      - BASE_URL=landscape-backend
+    networks:
+      - landscape-network
+networks:
+  landscape-network:
 volumes:
   db_data:
     driver: local
