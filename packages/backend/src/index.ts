@@ -31,7 +31,7 @@ import { PluginEnvironment } from './types';
 import { ServerPermissionClient } from '@backstage/plugin-permission-node';
 import { DefaultIdentityClient } from '@backstage/plugin-auth-node';
 import devTools from './plugins/devtools';
-
+import healthcheck from './plugins/healthcheck';
 function makeCreateEnv(config: Config) {
   const root = getRootLogger();
   const reader = UrlReaders.default({ logger: root, config });
@@ -78,6 +78,7 @@ async function main() {
   });
   const createEnv = makeCreateEnv(config);
 
+  const healthcheckEnv = useHotMemoize(module, () => createEnv('healthcheck'));
   const catalogEnv = useHotMemoize(module, () => createEnv('catalog'));
   const scaffolderEnv = useHotMemoize(module, () => createEnv('scaffolder'));
   const authEnv = useHotMemoize(module, () => createEnv('auth'));
@@ -95,12 +96,14 @@ async function main() {
   apiRouter.use('/search', await search(searchEnv));
   apiRouter.use('/devtools', await devTools(devToolsEnv));
 
+
   // Add backends ABOVE this line; this 404 handler is the catch-all fallback
   apiRouter.use(notFoundHandler());
 
   const service = createServiceBuilder(module)
     .loadConfig(config)
     .addRouter('/api', apiRouter)
+    .addRouter('', await healthcheck(healthcheckEnv))
 
   await service.start().catch(err => {
     console.log(err);
