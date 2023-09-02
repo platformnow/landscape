@@ -2,8 +2,8 @@
 
 set -Eeuo pipefail
 
-# Substitute environment variables in default.conf.template and overwrite default.conf
-envsubst '$BASE_URL' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf
+## Substitute environment variables in default.conf.template and overwrite default.conf
+#envsubst '$BASE_URL' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf
 
 
 function inject_config() {
