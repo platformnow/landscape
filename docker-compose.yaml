@@ -32,8 +32,8 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    environment:
-      - BASE_URL=landscape-backend
+#    environment:
+#      - APP_CONFIG_backend_baseUrl=http://landscape-backend
     networks:
       - landscape-network
 networks:
