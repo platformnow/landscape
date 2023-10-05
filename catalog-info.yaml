@@ -3,11 +3,10 @@ kind: Component
 metadata:
   name: landscape
   description: An example of a Backstage application.
-  # Example for optional annotations
-  # annotations:
-  #   github.com/project-slug: backstage/backstage
+  annotations:
+    github.com/project-slug: platformnow/landscape
   #   backstage.io/techdocs-ref: dir:.
 spec:
   type: website
-  owner: john@example.com
+  owner: guests
   lifecycle: experimental
