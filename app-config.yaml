@@ -88,6 +88,12 @@ catalog:
   rules:
     - allow: [Component, System, API, Resource, Location, Group, User, Domain, Project, Template]
   locations:
+    # Files to this application
+    - type: file
+      target: catalog-info.yaml
+    - type: file
+      target: ../app/catalog-info.yaml
+
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
       target: ../../examples/entities.yaml

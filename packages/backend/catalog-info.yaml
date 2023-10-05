@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: landscape-backend
+  description: Landscape Backend
+  annotations:
+    github.com/project-slug: platformnow/landscape
+  #   backstage.io/techdocs-ref: dir:.
+spec:
+  type: backend
+  owner: guests
+  lifecycle: experimental
