@@ -28,6 +28,15 @@ docker build -t landscape-backend -f Dockerfile.backend-buildsteps .
 
 # Build the backend
 docker build -t landscape-frontend -f Dockerfile.frontend-buildsteps .
+```
+
+To build for multiple architectures, use the following commands:
+
+```sh
+docker buildx build --platform linux/amd64,linux/arm64 -t landscape-backend -f Dockerfile.backend-buildsteps .
+
+docker buildx build --platform linux/amd64,linux/arm64 -t landscape-frontend -f Dockerfile.backend-buildsteps .
+```
 
 # Run the database, frontend and backend
 docker-compose up

@@ -1,5 +1,4 @@
-ARG BUILD_PLATFORM=linux/amd64
-FROM --platform=$BUILD_PLATFORM node:18-bookworm AS build
+FROM node:18-bookworm AS build
 ENV NODE_ENV=production
 RUN mkdir /app
 COPY . /app
