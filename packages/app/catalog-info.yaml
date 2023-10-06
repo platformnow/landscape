@@ -7,7 +7,7 @@ metadata:
     github.com/project-slug: platformnow/landscape
   #   backstage.io/techdocs-ref: dir:.
 spec:
-  type: frontend-service
-  owner: user:guest
+  type: website
+  owner: guests
   lifecycle: experimental
   system: landscape-idp
