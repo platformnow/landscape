@@ -10,7 +10,7 @@ COPY app-config.yaml app-config.production.yaml ./packages/app
 RUN yarn install
 RUN yarn workspace app build --config app-config.yaml --config app-config.production.yaml
 
-FROM --platform=$BUILD_PLATFORM nginx:mainline
+FROM nginx:mainline
 
 RUN apt-get update && apt-get -y install jq && rm -rf /var/lib/apt/lists/*
 
