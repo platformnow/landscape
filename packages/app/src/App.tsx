@@ -38,9 +38,28 @@ import { HomePage } from './components/home/HomePage';
 import { CatalogUnprocessedEntitiesPage } from '@backstage/plugin-catalog-unprocessed-entities';
 import { DevToolsPage } from '@backstage/plugin-devtools';
 import { customDevToolsPage } from './components/devtools/CustomDevToolsPage';
+import { githubAuthApiRef } from '@backstage/core-plugin-api';
+import { SignInPage } from '@backstage/core-components';
 import * as plugins from './plugins';
+import { AutoLogout } from '@backstage/core-components';
 
 const app = createApp({
+  components: {
+    SignInPage: props => (
+      <SignInPage
+        auto
+        {...props}
+        providers={[
+          {
+            id: 'github-auth-provider',
+            title: 'GitHub',
+            message: 'Sign in using GitHub',
+            apiRef: githubAuthApiRef,
+          },
+        ]}
+      />
+    ),
+  },
   apis,
   plugins: Object.values(plugins),
   bindRoutes({ bind }) {
@@ -112,6 +131,7 @@ const routes = (
 
 export default app.createRoot(
   <>
+    <AutoLogout/>
     <AlertDisplay />
     <OAuthRequestDialog />
     <AppRouter>

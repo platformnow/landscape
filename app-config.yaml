@@ -76,6 +76,11 @@ techdocs:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
 auth:
+  # https://backstage.io/docs/auth/autologout
+  autologout:
+    enabled: true
+    idleTimeoutMinutes: 30
+    promptBeforeIdleSeconds: 30
   # see https://backstage.io/docs/auth/ to learn about auth providers
   environment: development
   providers:
