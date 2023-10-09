@@ -48,8 +48,11 @@ const app = createApp({
     SignInPage: props => (
       <SignInPage
         auto
+        title="Select a sign-in method"
+        align="center"
         {...props}
         providers={[
+          'guest',
           {
             id: 'github-auth-provider',
             title: 'GitHub',
