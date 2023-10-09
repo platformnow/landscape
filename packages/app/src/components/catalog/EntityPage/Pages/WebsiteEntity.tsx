@@ -1,6 +1,7 @@
 import { EntityLayout } from "@backstage/plugin-catalog";
 import React from "react";
 import {
+    adrContent,
     cdContent,
     ciContent,
     dependenciesContent,
@@ -10,6 +11,7 @@ import {
     techdocsContent
 } from "../Content";
 import {EntityGithubInsightsContent} from "@roadiehq/backstage-plugin-github-insights";
+import {isAdrAvailable} from "@backstage/plugin-adr";
 
 export const websiteEntityPage = (
     <EntityLayout>
@@ -38,6 +40,9 @@ export const websiteEntityPage = (
             path="/code-insights"
             title="Code Insights">
             <EntityGithubInsightsContent />
+        </EntityLayout.Route>
+        <EntityLayout.Route if={isAdrAvailable} path="/adrs" title="ADRs">
+            {adrContent}
         </EntityLayout.Route>
     </EntityLayout>
 );

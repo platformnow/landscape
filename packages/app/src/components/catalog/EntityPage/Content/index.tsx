@@ -6,3 +6,4 @@ export * from './Deployments';
 export * from './Dependencies';
 export * from './PullRequests';
 export * from './Registry';
+export * from './ADR';

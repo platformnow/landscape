@@ -25,6 +25,7 @@ import {
   Page,
 } from '@backstage/core-components';
 import { useApi } from '@backstage/core-plugin-api';
+import {AdrSearchResultListItem} from "@backstage/plugin-adr";
 
 const useStyles = makeStyles((theme: Theme) => ({
   bar: {
@@ -69,6 +70,11 @@ const SearchPage = () => {
                 {
                   value: 'techdocs',
                   name: 'Documentation',
+                  icon: <DocsIcon />,
+                },
+                {
+                  value: 'adr',
+                  name: 'Architecture Decision Records',
                   icon: <DocsIcon />,
                 },
               ]}
@@ -133,6 +139,12 @@ const SearchPage = () => {
                             highlight={highlight}
                             rank={rank}
                           />
+                        );
+                      case 'adr':
+                        return (
+                            <AdrSearchResultListItem
+                                key={document.location}
+                            />
                         );
                       default:
                         return (

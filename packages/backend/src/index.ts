@@ -34,6 +34,7 @@ import devTools from './plugins/devtools';
 import healthcheck from './plugins/healthcheck';
 import sonarqube from './plugins/sonarqube';
 import argocd from './plugins/argocd';
+import adr from './plugins/adr';
 
 function makeCreateEnv(config: Config) {
   const root = getRootLogger();
@@ -43,6 +44,7 @@ function makeCreateEnv(config: Config) {
   const databaseManager = DatabaseManager.fromConfig(config, { logger: root });
   const tokenManager = ServerTokenManager.noop();
   const taskScheduler = TaskScheduler.fromConfig(config);
+
 
   const identity = DefaultIdentityClient.create({
     discovery,
@@ -91,6 +93,7 @@ async function main() {
   const devToolsEnv = useHotMemoize(module, () => createEnv('devtools'));
   const sonarqubeEnv = useHotMemoize(module, () => createEnv('sonarqube'));
   const argocdEnv = useHotMemoize(module, () => createEnv('argocd'));
+  const adrEnv = useHotMemoize(module, () => createEnv('adr'));
 
   const apiRouter = Router();
   apiRouter.use('/catalog', await catalog(catalogEnv));
@@ -102,6 +105,7 @@ async function main() {
   apiRouter.use('/devtools', await devTools(devToolsEnv));
   apiRouter.use('/sonarqube', await sonarqube(sonarqubeEnv));
   apiRouter.use('/argocd', await argocd(argocdEnv));
+  apiRouter.use('/adr', await adr(adrEnv));
 
 
   // Add backends ABOVE this line; this 404 handler is the catch-all fallback

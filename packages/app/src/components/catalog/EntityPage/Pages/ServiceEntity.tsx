@@ -3,6 +3,7 @@ import {Grid} from "@material-ui/core";
 import {EntityConsumedApisCard, EntityProvidedApisCard} from "@backstage/plugin-api-docs";
 import React from "react";
 import {
+    adrContent,
     cdContent,
     ciContent, dependenciesContent,
     deploymentsContent,
@@ -14,6 +15,7 @@ import {
     isNexusRepositoryManagerAvailable,
 } from "@janus-idp/backstage-plugin-nexus-repository-manager";
 import {EntityGithubInsightsContent} from "@roadiehq/backstage-plugin-github-insights";
+import {isAdrAvailable} from "@backstage/plugin-adr";
 
 export const serviceEntityPage = (
     <EntityLayout>
@@ -60,6 +62,9 @@ export const serviceEntityPage = (
             path="/code-insights"
             title="Code Insights">
             <EntityGithubInsightsContent />
+        </EntityLayout.Route>
+        <EntityLayout.Route if={isAdrAvailable} path="/adrs" title="ADRs">
+            {adrContent}
         </EntityLayout.Route>
     </EntityLayout>
 );

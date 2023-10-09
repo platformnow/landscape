@@ -1,6 +1,7 @@
 import { EntityLayout } from '@backstage/plugin-catalog';
 import React from 'react';
-import {dependenciesContent, overviewContent, techdocsContent} from '../Content';
+import {adrContent, dependenciesContent, overviewContent, techdocsContent} from '../Content';
+import {isAdrAvailable} from "@backstage/plugin-adr";
 
 export const defaultEntityPage = (
     <EntityLayout>
@@ -12,6 +13,9 @@ export const defaultEntityPage = (
         </EntityLayout.Route>
         <EntityLayout.Route path="/dependencies" title="Dependencies">
             {dependenciesContent}
+        </EntityLayout.Route>
+          <EntityLayout.Route if={isAdrAvailable} path="/adrs" title="ADRs">
+            {adrContent}
         </EntityLayout.Route>
     </EntityLayout>
 );
