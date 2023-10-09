@@ -118,6 +118,27 @@ const data = [
         ]
     },
     {
+        "title": "Documentation",
+        "isExpanded": false,
+        "links": [
+            {
+                "iconUrl": "/homepage/icons/icons8/notion.png",
+                "label": "Notion",
+                "url": "https://www.notion.so/"
+            },
+            {
+                "iconUrl": "/homepage/icons/icons8/jira.png",
+                "label": "Jira",
+                "url": "https://aerocrs.atlassian.net/jira/"
+            },
+            {
+                "iconUrl": "/homepage/icons/icons8/confluence.png",
+                "label": "Confluence",
+                "url": "https://aerocrs.atlassian.net/"
+            },
+        ]
+    },
+    {
         "title": "Source Code Management",
         "isExpanded": false,
         "links": [
@@ -185,6 +206,11 @@ const data = [
                 "iconUrl": "/homepage/icons/nexus.png",
                 "label": "Nexus",
                 "url": "https://nxs.worldticket.net/"
+            },
+            {
+                "iconUrl": "/homepage/icons/icons8/jenkins.png",
+                "label": "Jenkins",
+                "url": "https://jenkins.worldticket.net/jenkins/"
             }
         ]
     },
