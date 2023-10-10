@@ -42,6 +42,7 @@ import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { SignInPage } from '@backstage/core-components';
 import * as plugins from './plugins';
 import { AutoLogout } from '@backstage/core-components';
+import {EntityValidationPage} from "@backstage/plugin-entity-validation";
 
 const app = createApp({
   components: {
@@ -129,6 +130,7 @@ const routes = (
     <Route path="/devtools" element={<DevToolsPage />} >
       {customDevToolsPage}
     </Route>
+    <Route path="/entity-validation" element={<EntityValidationPage />} />
   </FlatRoutes>
 );
 
