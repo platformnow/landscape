@@ -42,6 +42,7 @@ import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { SignInPage } from '@backstage/core-components';
 import * as plugins from './plugins';
 import { AutoLogout } from '@backstage/core-components';
+import { ToolLinksComponent } from '@platformnow/plugin-tool-links';
 
 const app = createApp({
   components: {
@@ -126,6 +127,7 @@ const routes = (
     <Route path="/devtools" element={<DevToolsPage />} >
       {customDevToolsPage}
     </Route>
+    <Route path="/tool-links" element={<ToolLinksComponent />} />
   </FlatRoutes>
 );
 

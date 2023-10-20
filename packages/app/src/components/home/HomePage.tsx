@@ -12,6 +12,7 @@ import {
 } from '@backstage/plugin-search-react';
 import { Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
+import {ToolLinksComponent} from '@platformnow/plugin-tool-links';
 
 const clockConfigs: ClockConfig[] = [
     {
@@ -90,6 +91,9 @@ export const HomePage = () => {
                             />
                         </Grid>
                         <Grid container item xs={12}>
+                            <Grid item xs={12} md={6}>
+                                <ToolLinksComponent />
+                            </Grid>
                             <Grid item xs={12} md={6}>
                                 <HomePageStarredEntities />
                             </Grid>
