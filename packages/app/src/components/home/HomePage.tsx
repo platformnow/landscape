@@ -2,7 +2,7 @@ import {
     HomePageCompanyLogo,
     HomePageStarredEntities,
     TemplateBackstageLogo,
-    ClockConfig, WelcomeTitle, HeaderWorldClock, HomePageRecentlyVisited,
+    ClockConfig, WelcomeTitle, HeaderWorldClock, HomePageRecentlyVisited, HomePageRandomJoke,
 } from '@backstage/plugin-home';
 import {Content, Page, Header} from '@backstage/core-components';
 import { HomePageSearchBar } from '@backstage/plugin-search';
@@ -75,11 +75,12 @@ const useLogoStyles = makeStyles(theme => ({
 export const HomePage = () => {
     const classes = useStyles();
     const { svg, path, container } = useLogoStyles();
+    const languages = ['English', 'French', 'Arabic', 'Bengali', 'Chinese', 'Hebrew']
 
     return (
         <SearchContextProvider>
             <Page themeId="home">
-                <Header title={<WelcomeTitle />} pageTitleOverride="Home">
+                <Header title={<WelcomeTitle language={languages} />} pageTitleOverride="Home">
                     <HeaderWorldClock
                         clockConfigs={clockConfigs}
                         customTimeFormat={timeFormat}
@@ -108,6 +109,9 @@ export const HomePage = () => {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <HomePageRecentlyVisited />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <HomePageRandomJoke />
                                     </Grid>
                                 </Grid>
                             </Grid>
