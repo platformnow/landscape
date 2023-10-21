@@ -44,6 +44,13 @@ import * as plugins from './plugins';
 import { AutoLogout } from '@backstage/core-components';
 import { ToolLinksComponent } from '@platformnow/plugin-tool-links';
 import {EntityValidationPage} from "@backstage/plugin-entity-validation";
+import { customLightTheme } from './themes/lightTheme';
+import { customDarkTheme } from './themes/darkTheme';
+import { useUpdateTheme } from './hooks/useUpdateTheme';
+import { UnifiedThemeProvider } from '@backstage/theme';
+import LightIcon from '@mui/icons-material/WbSunny';
+import DarkIcon from '@mui/icons-material/Brightness2';
+
 const app = createApp({
   components: {
     SignInPage: props => (
@@ -81,6 +88,38 @@ const app = createApp({
       catalogIndex: catalogPlugin.routes.catalogIndex,
     });
   },
+    themes: [
+        {
+            id: 'light',
+            title: 'Light Theme',
+            variant: 'light',
+            icon: <LightIcon />,
+            Provider: ({ children }) => {
+                const themeColors = useUpdateTheme('light');
+                return (
+                    <UnifiedThemeProvider
+                        theme={customLightTheme(themeColors)}
+                        children={children}
+                    />
+                );
+            },
+        },
+        {
+            id: 'dark',
+            title: 'Dark Theme',
+            variant: 'dark',
+            icon: <DarkIcon />,
+            Provider: ({ children }) => {
+                const themeColors = useUpdateTheme('dark');
+                return (
+                    <UnifiedThemeProvider
+                        theme={customDarkTheme(themeColors)}
+                        children={children}
+                    />
+                );
+            },
+        },
+    ],
 });
 
 const routes = (
