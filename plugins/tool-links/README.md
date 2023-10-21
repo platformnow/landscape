@@ -10,7 +10,7 @@ The following sections will help you get the Tool-Links plugin setup and running
 
 ### Backend
 
-You need to setup the [Tool-Links backend plugin](https://github.com/platformnow/backstage/tree/master/plugins/tool-links-backend) before you move forward with any of these steps if you haven't already
+You need to setup the [Tool-Links backend plugin](https://github.com/platformnow/landscape/tree/master/plugins/tool-links-backend) before you move forward with any of these steps if you haven't already
 
 ### Installation
 
