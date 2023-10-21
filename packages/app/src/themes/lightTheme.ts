@@ -1,11 +1,9 @@
 import { createUnifiedTheme, themes } from '@backstage/theme';
-import { pageFontFamily } from './consts';
 import { pageTheme } from './pageTheme';
 import { ThemeColors } from '../types/types';
 
 export const customLightTheme = (themeColors: ThemeColors) =>
     createUnifiedTheme({
-        fontFamily: pageFontFamily,
         palette: {
             ...themes.light.getTheme('v5')?.palette,
             ...(themeColors.primaryColor && {
