@@ -2,7 +2,7 @@ import {
     HomePageCompanyLogo,
     HomePageStarredEntities,
     TemplateBackstageLogo,
-    ClockConfig, WelcomeTitle, HeaderWorldClock,
+    ClockConfig, WelcomeTitle, HeaderWorldClock, HomePageRecentlyVisited,
 } from '@backstage/plugin-home';
 import {Content, Page, Header} from '@backstage/core-components';
 import { HomePageSearchBar } from '@backstage/plugin-search';
@@ -102,11 +102,14 @@ export const HomePage = () => {
                                 <ToolLinksComponent />
                             </Grid>
                             <Grid item xs={12} md={6}>
-                                <HomePageStarredEntities />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                            </Grid>
-                            <Grid item xs={12} md={6}>
+                                <Grid container justifyContent='center'>
+                                    <Grid item xs={12}>
+                                        <HomePageStarredEntities />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <HomePageRecentlyVisited />
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
