@@ -1,6 +1,6 @@
 {
   "name": "@platformnow/plugin-tool-links-backend",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "license": "Apache-2.0",
@@ -47,13 +47,16 @@
   "description": "Welcome to the tool-links backend plugin!",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/platformnow/landscape.git"
+    "url": "https://github.com/platformnow/landscape",
+    "directory": "plugins/tool-links-backend"
   },
   "keywords": [
+    "backstage",
+    "backend",
+    "plugin",
     "tools",
     "links",
-    "backend",
-    "backstage"
+    "homepage"
   ],
   "author": "officialplatformguy"
 }
