@@ -51,6 +51,7 @@
     "@backstage/theme": "^0.4.3",
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.9.1",
+    "@mui/icons-material": "^5.14.14",
     "@platformnow/plugin-tool-links": "^0.3.0",
     "@roadiehq/backstage-plugin-github-insights": "^2.3.21",
     "@roadiehq/backstage-plugin-github-pull-requests": "^2.5.18",
