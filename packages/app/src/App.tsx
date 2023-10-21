@@ -43,14 +43,17 @@ import { SignInPage } from '@backstage/core-components';
 import * as plugins from './plugins';
 import { AutoLogout } from '@backstage/core-components';
 import { ToolLinksComponent } from '@platformnow/plugin-tool-links';
-
+import {EntityValidationPage} from "@backstage/plugin-entity-validation";
 const app = createApp({
   components: {
     SignInPage: props => (
       <SignInPage
         auto
+        title="Select a sign-in method"
+        align="center"
         {...props}
         providers={[
+          'guest',
           {
             id: 'github-auth-provider',
             title: 'GitHub',
@@ -128,6 +131,7 @@ const routes = (
       {customDevToolsPage}
     </Route>
     <Route path="/tool-links" element={<ToolLinksComponent />} />
+    <Route path="/entity-validation" element={<EntityValidationPage />} />
   </FlatRoutes>
 );
 
