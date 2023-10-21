@@ -1,9 +1,8 @@
 import {
-    HomePageToolkit,
     HomePageCompanyLogo,
     HomePageStarredEntities,
     TemplateBackstageLogo,
-    TemplateBackstageLogoIcon, ClockConfig, WelcomeTitle, HeaderWorldClock,
+    ClockConfig, WelcomeTitle, HeaderWorldClock,
 } from '@backstage/plugin-home';
 import {Content, Page, Header} from '@backstage/core-components';
 import { HomePageSearchBar } from '@backstage/plugin-search';
@@ -16,20 +15,28 @@ import {ToolLinksComponent} from '@platformnow/plugin-tool-links';
 
 const clockConfigs: ClockConfig[] = [
     {
-        label: 'NYC',
-        timeZone: 'America/New_York',
-    },
-    {
-        label: 'UTC',
-        timeZone: 'UTC',
-    },
-    {
         label: 'GMT',
         timeZone: 'Europe/London',
     },
     {
-        label: 'TYO',
-        timeZone: 'Asia/Tokyo',
+        label: 'PST',
+        timeZone: 'America/Los_Angeles',
+    },
+    {
+        label: 'IDT',
+        timeZone: 'Asia/Tel_Aviv',
+    },
+    {
+        label: 'UKR',
+        timeZone: 'Europe/Kiev',
+    },
+    {
+        label: 'SGT',
+        timeZone: 'Asia/Singapore',
+    },
+    {
+        label: 'AEST',
+        timeZone: 'Australia/Sydney',
     },
 ];
 
@@ -98,13 +105,6 @@ export const HomePage = () => {
                                 <HomePageStarredEntities />
                             </Grid>
                             <Grid item xs={12} md={6}>
-                                <HomePageToolkit
-                                    tools={Array(6).fill({
-                                        url: '#',
-                                        label: 'link',
-                                        icon: <TemplateBackstageLogoIcon />,
-                                    })}
-                                />
                             </Grid>
                             <Grid item xs={12} md={6}>
                             </Grid>
