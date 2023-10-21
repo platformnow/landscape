@@ -6911,6 +6911,24 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
+"@platformnow/plugin-tool-links@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@platformnow/plugin-tool-links/-/plugin-tool-links-0.3.0.tgz#642642249509cada5975f80cec1312d7d8e55cb5"
+  integrity sha512-MQisA8F0mrMp+BWkRBsZiH8RpQEMGBXMJtCiqqNm3O/IgZytpqjCeT3mi4vhGdb+9I2/wopmCJZAnI97oR65ew==
+  dependencies:
+    "@backstage/core-components" "^0.13.5"
+    "@backstage/core-plugin-api" "^1.6.0"
+    "@backstage/errors" "^1.2.2"
+    "@backstage/plugin-catalog-react" "^1.8.4"
+    "@backstage/plugin-home" "^0.5.8"
+    "@backstage/plugin-permission-react" "^0.4.15"
+    "@backstage/theme" "^0.4.2"
+    "@material-ui/core" "^4.9.13"
+    "@material-ui/icons" "^4.9.1"
+    "@material-ui/lab" "^4.0.0-alpha.60"
+    react-hook-form "^7.13.0"
+    react-use "^17.2.4"
+
 "@pmmmwh/react-refresh-webpack-plugin@^0.5.7":
   version "0.5.11"
   resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.11.tgz#7c2268cedaa0644d677e8c4f377bc8fb304f714a"
@@ -9835,7 +9853,7 @@ anymatch@^3.0.3, anymatch@~3.1.2:
     "@backstage/theme" "^0.4.2"
     "@material-ui/core" "^4.12.2"
     "@material-ui/icons" "^4.9.1"
-    "@platformnow/plugin-tool-links" "^0.1.0"
+    "@platformnow/plugin-tool-links" "^0.3.0"
     history "^5.0.0"
     react "^17.0.2"
     react-dom "^17.0.2"

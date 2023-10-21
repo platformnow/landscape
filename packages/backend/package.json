@@ -35,7 +35,7 @@
     "@backstage/plugin-search-backend-module-pg": "^0.5.14",
     "@backstage/plugin-search-backend-node": "^1.2.9",
     "@backstage/plugin-techdocs-backend": "^1.7.2",
-    "@platformnow/plugin-tool-links-backend": "^0.1.0",
+    "@platformnow/plugin-tool-links-backend": "^0.3.0",
     "@types/pg": "^8.6.6",
     "app": "link:../app",
     "better-sqlite3": "^8.0.0",
