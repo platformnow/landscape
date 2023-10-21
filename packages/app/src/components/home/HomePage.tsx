@@ -1,7 +1,6 @@
 import {
     HomePageCompanyLogo,
     HomePageStarredEntities,
-    TemplateBackstageLogo,
     ClockConfig, WelcomeTitle, HeaderWorldClock, HomePageRecentlyVisited, HomePageRandomJoke,
 } from '@backstage/plugin-home';
 import {Content, Page, Header} from '@backstage/core-components';
@@ -12,6 +11,7 @@ import {
 import { Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
 import {ToolLinksComponent} from '@platformnow/plugin-tool-links';
+import {LandscapeLogo} from "./LandscapeLogo";
 
 const clockConfigs: ClockConfig[] = [
     {
@@ -65,7 +65,7 @@ const useLogoStyles = makeStyles(theme => ({
     },
     svg: {
         width: 'auto',
-        height: 100,
+        height: 150,
     },
     path: {
         fill: '#7df3e1',
@@ -90,7 +90,7 @@ export const HomePage = () => {
                     <Grid container justifyContent="center" spacing={6}>
                         <HomePageCompanyLogo
                             className={container}
-                            logo={<TemplateBackstageLogo classes={{ svg, path }} />}
+                            logo={<LandscapeLogo classes={{ svg, path }} />}
                         />
                         <Grid container item xs={12} justifyContent='center'>
                             <HomePageSearchBar
