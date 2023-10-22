@@ -43,13 +43,13 @@ import { SignInPage } from '@backstage/core-components';
 import * as plugins from './plugins';
 import { AutoLogout } from '@backstage/core-components';
 import { ToolLinksComponent } from '@platformnow/plugin-tool-links';
-import {EntityValidationPage} from "@backstage/plugin-entity-validation";
 import { customLightTheme } from './themes/lightTheme';
 import { customDarkTheme } from './themes/darkTheme';
 import { useUpdateTheme } from './hooks/useUpdateTheme';
 import { UnifiedThemeProvider } from '@backstage/theme';
 import LightIcon from '@mui/icons-material/WbSunny';
 import DarkIcon from '@mui/icons-material/Brightness2';
+import { ToolboxPage } from '@drodil/backstage-plugin-toolbox';
 
 const app = createApp({
   components: {
@@ -170,7 +170,7 @@ const routes = (
       {customDevToolsPage}
     </Route>
     <Route path="/tool-links" element={<ToolLinksComponent />} />
-    <Route path="/entity-validation" element={<EntityValidationPage />} />
+    <Route path="/toolbox" element={<ToolboxPage />} />
   </FlatRoutes>
 );
 
