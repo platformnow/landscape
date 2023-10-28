@@ -8,6 +8,6 @@ metadata:
   #   backstage.io/techdocs-ref: dir:.
 spec:
   type: website
-  owner: guests
-  lifecycle: experimental
-  system: landscape-idp
+  owner: platformnow
+  lifecycle: production
+  system: landscape
