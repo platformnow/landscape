@@ -65,7 +65,7 @@ const useLogoStyles = makeStyles(theme => ({
     },
     svg: {
         width: 'auto',
-        height: 150,
+        height: 100,
     },
     path: {
         fill: '#7df3e1',
