@@ -1,14 +1,11 @@
 .PHONY: clean up docker-build down helm-setup helm-clean release helm-tag init apply diff sync
 
-LOCAL_REPOSITORY = landscape
+LOCAL_REPOSITORY = platformnow
 APP_NAME = landscape
-CHARTS_DIRECTORY := charts/${APP_NAME}
-PREVIEW_DIRECTORY := charts/preview
 OS := $(shell uname)
-ENVIRONMENT ?= local-preview
 TAG ?= latest
-BUILD_PLATFORM ?= linux/amd64
-
+BUILD_VERSION ?= $(shell cat package.json | grep version | head -1 | awk -F: '{ print $$2 }' | sed 's/[", ]//g')
+RELEASE_VERSION ?= $(shell cat package.json | grep version | head -1 | awk -F: '{ print $$2 }' | sed 's/[", ]//g')
 ###################
 # DOCKER COMMANDS #
 ###################
@@ -26,38 +23,6 @@ clean: rm-volume
 rm-volume:
 	docker volume rm landscape_db_data
 
-local-docker: docker-local-build-frontend docker-local-build-backend
-
-docker-build-frontend:
-	yarn install
-	yarn tsc
-	yarn workspace app build --config ../../app-config.frontend-production.yaml
-	docker build --platform=${BUILD_PLATFORM} -t ${LOCAL_REPOSITORY}/landscape-frontend -t registry.lenderos.com/${LOCAL_REPOSITORY}/landscapefrontend:${TAG} -f Dockerfile.frontend .
-
-docker-local-build-frontend:
-	yarn install
-	yarn tsc
-	yarn workspace app build --config ../../app-config.yaml
-	docker build --platform=linux/arm64 -t ${LOCAL_REPOSITORY}/landscape-frontend -t registry.lenderos.com/${LOCAL_REPOSITORY}/landscapefrontend:${TAG} -f Dockerfile.frontend .
-
-docker-build-backend:
-	yarn install
-	yarn tsc
-	yarn build
-	docker build --platform=${BUILD_PLATFORM} -t ${LOCAL_REPOSITORY}/landscape-backend -t registry.lenderos.com/${LOCAL_REPOSITORY}/landscape-backend:${TAG} -f Dockerfile.backend .
-
-docker-local-build-backend:
-	yarn install
-	yarn tsc
-	yarn build
-	docker build --platform=linux/arm64 -t ${LOCAL_REPOSITORY}/landscape-backend -t registry.lenderos.com/${LOCAL_REPOSITORY}/landscape-backend:${TAG} -f Dockerfile.backend .
-
-docker-push-frontend:
-	docker push registry.lenderos.com/${LOCAL_REPOSITORY}/landscape-frontend:${TAG}
-
-docker-push-backend:
-	docker push registry.lenderos.com/${LOCAL_REPOSITORY}/landscape-backend:${TAG}
-
 down:
 	@docker-compose down  --remove-orphans
 
@@ -65,8 +30,21 @@ clean:
 	@rm -rf .volumes/
 	@rm -rf ~/${APP_NAME}-data
 
-docker-release: bump-version docker-push-release
-	@echo "Built ${BUILD_VERSION} version, pushed to ${DOCKER_REGISTRY}${APP_NAME} and tagged as ${RELEASE_VERSION}, ${BUILD_VERSION}"
+docker-build-frontend:
+	docker build -t landscape-frontend -t ghcr.io/platformnow/landscape-frontend:${TAG} -f Dockerfile.frontend-buildsteps .
+
+docker-build-backend:
+	docker build -t landscape-backend -t ghcr.io/platformnow/landscape-backend:${TAG} -f Dockerfile.backend-buildsteps .
+
+docker-build-all: docker-build-frontend docker-build-backend
+
+docker-push-frontend:
+	docker push ghcr.io/${LOCAL_REPOSITORY}/landscape-frontend:${TAG}
+
+docker-push-backend:
+	docker push ghcr.io/${LOCAL_REPOSITORY}/landscape-backend:${TAG}
+
+docker-push-all: docker-push-frontend docker-push-backend
 
 bump-version:
 ifeq ($(OS),Darwin)
@@ -81,7 +59,3 @@ else
 	@echo "platfrom $(OS) not supported to release from"
 	exit -1
 endif
-
-docker-push-release:
-	@echo "$DOCKER_AUTH_CONFIG" > /kaniko/.docker/config.json
-	@/kaniko/executor --context ./ --dockerfile ./Dockerfile --destination ${DOCKER_REGISTRY}${APP_NAME}:${BUILD_VERSION} --destination ${DOCKER_REGISTRY}${APP_NAME}:${RELEASE_VERSION}
