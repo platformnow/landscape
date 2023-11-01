@@ -12,13 +12,6 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
-
     permissions:
       contents: read
       packages: write
@@ -61,7 +54,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: ${{ matrix.platform }}
+          platforms: linux/amd64,linux/arm64
           file: Dockerfile.backend-buildsteps
           push: true
           tags: ${{ steps.meta.outputs.tags }}
