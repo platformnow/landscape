@@ -2233,7 +2233,7 @@
     semver "^7.5.3"
     zod "^3.21.4"
 
-"@backstage/cli@^0.23.0":
+"@backstage/cli@^0.23.1":
   version "0.23.1"
   resolved "https://registry.yarnpkg.com/@backstage/cli/-/cli-0.23.1.tgz#ef4cc4d045a7eac654da673f9387dacbedc6ab63"
   integrity sha512-SQjLRa00NII8YC09QLkB8WtorpcZzRRwh1H6O72QMx2ggyofZNif1GR9hk6oQrAaA4s8FT+8Wx5irmRWlgo/zQ==
@@ -2398,7 +2398,7 @@
     zen-observable "^0.10.0"
     zod "^3.21.4"
 
-"@backstage/core-components@^0.13.5", "@backstage/core-components@^0.13.6":
+"@backstage/core-components@^0.13.5", "@backstage/core-components@^0.13.6", "@backstage/core-components@^0.13.7":
   version "0.13.7"
   resolved "https://registry.yarnpkg.com/@backstage/core-components/-/core-components-0.13.7.tgz#5832115e73bca5685344df81fd2e537422d98aa2"
   integrity sha512-pbqI+xYggeMdXmLoI0lDdcXj0yPv7x5iiHhiOyjUmC9lI509WIjyH5s9NSImwLac7ng/B0ORJn+a+6nD3hqyYg==
@@ -2639,7 +2639,7 @@
     passport "^0.6.0"
     passport-oauth2 "^1.6.1"
 
-"@backstage/plugin-auth-backend@^0.19.3":
+"@backstage/plugin-auth-backend@^0.19.4":
   version "0.19.4"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-auth-backend/-/plugin-auth-backend-0.19.4.tgz#6aa91117f74d0f3b58dfa1a847c041c2bb5d6396"
   integrity sha512-lmYQyKHl/MrM8K/RwVN8fx1VcKFUdHxknpod2CGP+5iT2iFFCdmStaqY03EKiHFK8LaukB5x7tT7iFhcGQzvIA==
@@ -3207,7 +3207,7 @@
     react-use "^17.2.4"
     swr "^2.0.0"
 
-"@backstage/plugin-proxy-backend@^0.4.3":
+"@backstage/plugin-proxy-backend@^0.4.4":
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-proxy-backend/-/plugin-proxy-backend-0.4.4.tgz#2f998eaafdd58844a95c16463db8c6e9367ea7d1"
   integrity sha512-W8wWKL5cKUbpWpqhdAFfC5f4BrSyc2GtPeXtAz3uGFP5YyAmr5hPaETHZyqh6Uy4VER92nrOKNygPQPtN/pwdQ==
@@ -3226,7 +3226,7 @@
     yn "^4.0.0"
     yup "^0.32.9"
 
-"@backstage/plugin-scaffolder-backend@^1.18.0":
+"@backstage/plugin-scaffolder-backend@^1.18.1":
   version "1.18.1"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-scaffolder-backend/-/plugin-scaffolder-backend-1.18.1.tgz#ad1d3d0acc24b45386393565caee4046af7f0055"
   integrity sha512-q2+z4LENHK8VBUSxNguHS/riICJcQOMaQY9Qnw5hDSlCvFTz55N/4MX2hj4/92A5XEn9jsG963Yovd7uH00TTQ==
@@ -9463,9 +9463,9 @@ anymatch@^3.0.3, anymatch@~3.1.2:
   dependencies:
     "@backstage/app-defaults" "^1.4.4"
     "@backstage/catalog-model" "^1.4.3"
-    "@backstage/cli" "^0.23.0"
+    "@backstage/cli" "^0.23.1"
     "@backstage/core-app-api" "^1.11.0"
-    "@backstage/core-components" "^0.13.6"
+    "@backstage/core-components" "^0.13.7"
     "@backstage/core-plugin-api" "^1.7.0"
     "@backstage/integration-react" "^1.1.20"
     "@backstage/plugin-api-docs" "^0.9.12"
