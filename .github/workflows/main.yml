@@ -7,6 +7,9 @@ on:
 env:
   REGISTRY: ghcr.io
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,25 +19,28 @@ jobs:
       NODE_OPTIONS: --max-old-space-size=4096
 
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
-      # Beginning of yarn setup
-      - name: use node.js 20.x
+      - name: Set up Node.js
         uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4
         with:
           node-version: 20.x
           registry-url: https://registry.npmjs.org/ # Needed for auth
-      - name: cache all node_modules
+
+      - name: Cache all node_modules
         id: cache-modules
         uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-node_modules-${{ hashFiles('yarn.lock', '**/package.json') }}
-      - name: find location of global yarn cache
+
+      - name: Find location of global yarn cache
         id: yarn-cache
         if: steps.cache-modules.outputs.cache-hit != 'true'
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - name: cache global yarn cache
+
+      - name: Cache global yarn cache
         uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
         if: steps.cache-modules.outputs.cache-hit != 'true'
         with:
@@ -42,18 +48,19 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: yarn install
+
+      - name: Yarn install
         run: yarn install --immutable
       # End of yarn setup
 
-      - name: lint
+      - name: Lint
         run: yarn backstage-cli repo lint
 
-      - name: type checking and declarations
+      - name: Type checking and declarations
         run: yarn tsc:full
 
       # Build
-      - name: build
+      - name: Build
         run: yarn build:all
 
       - name: Set up QEMU
