@@ -1,0 +1,1 @@
+export { HomeScreenShortcutsPage } from './HomeScreenShortcutsPage';

@@ -35,7 +35,7 @@ import {
   EntityOwnershipCard,
 } from '@backstage/plugin-org';
 import { EntityTechdocsContent } from '@backstage/plugin-techdocs';
-import { EmptyState } from '@backstage/core-components';
+import {EmptyState, InfoCard} from '@backstage/core-components';
 import {
   Direction,
   EntityCatalogGraphCard,
@@ -53,6 +53,31 @@ import {
 
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
+import { EntityGithubPullRequestsContent } from '@roadiehq/backstage-plugin-github-pull-requests';
+import { EntityGithubPullRequestsOverviewCard } from '@roadiehq/backstage-plugin-github-pull-requests';
+import {
+    EntityArgoCDOverviewCard,
+    isArgocdAvailable
+} from '@roadiehq/backstage-plugin-argo-cd';
+import {
+    EntityGithubActionsContent,
+    isGithubActionsAvailable,
+} from '@backstage-community/plugin-github-actions';
+import {
+    isNexusRepositoryManagerExperimentalAvailable,
+    NexusRepositoryManagerPage,
+} from '@janus-idp/backstage-plugin-nexus-repository-manager';
+import {
+    EntityFeedbackResponseContent,
+    EntityStarredRatingsCard,
+    StarredRatingButtons
+} from "@backstage-community/plugin-entity-feedback";
+import { EntitySonarQubeCard } from '@backstage-community/plugin-sonarqube';
+import {FeatureFlagged} from "@backstage/core-app-api";
+import {
+    EntityGithubInsightsContent,
+} from "@roadiehq/backstage-plugin-github-insights";
+import {QetaContent} from "./QetaContent";
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -62,23 +87,19 @@ const techdocsContent = (
   </EntityTechdocsContent>
 );
 
-const cicdContent = (
+const ciContent = (
   // This is an example of how you can implement your company's logic in entity page.
   // You can for example enforce that all components of type 'service' should use GitHubActions
   <EntitySwitch>
-    {/*
-      Here you can add support for different CI/CD services, for example
-      using @backstage-community/plugin-github-actions as follows:
-      <EntitySwitch.Case if={isGithubActionsAvailable}>
+    <EntitySwitch.Case if={isGithubActionsAvailable}>
         <EntityGithubActionsContent />
-      </EntitySwitch.Case>
-     */}
+    </EntitySwitch.Case>
 
     <EntitySwitch.Case>
       <EmptyState
-        title="No CI/CD available for this entity"
+        title="No CI available for this entity"
         missing="info"
-        description="You need to add an annotation to your component if you want to enable CI/CD for it. You can read more about annotations in Backstage by clicking the button below."
+        description="You need to add an annotation to your component if you want to enable CI for it. You can read more about annotations in Backstage by clicking the button below."
         action={
           <Button
             variant="contained"
@@ -91,6 +112,35 @@ const cicdContent = (
       />
     </EntitySwitch.Case>
   </EntitySwitch>
+);
+
+const cdContent = (
+    // This is an example of how you can implement your company's logic in entity page.
+    // You can for example enforce that all components of type 'service' should use GitHubActions
+
+
+    <EntitySwitch>
+        <EntitySwitch.Case if={e => Boolean(isArgocdAvailable(e))}>
+            <EntityArgoCDOverviewCard />
+        </EntitySwitch.Case>
+
+        <EntitySwitch.Case>
+            <EmptyState
+                title="No CD available for this entity"
+                missing="info"
+                description="You need to add an annotation to your component if you want to enable CD for it. You can read more about annotations in Backstage by clicking the button below."
+                action={
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        href="https://backstage.io/docs/features/software-catalog/well-known-annotations"
+                    >
+                        Read more
+                    </Button>
+                }
+            />
+        </EntitySwitch.Case>
+    </EntitySwitch>
 );
 
 const entityWarningContent = (
@@ -130,13 +180,26 @@ const overviewContent = (
     <Grid item md={6} xs={12}>
       <EntityCatalogGraphCard variant="gridItem" height={400} />
     </Grid>
-
-    <Grid item md={4} xs={12}>
+    <Grid item md={6} xs={12}>
       <EntityLinksCard />
     </Grid>
+    <Grid item md={6}>
+        <FeatureFlagged with="sonarqube">
+            <EntitySonarQubeCard variant="gridItem" />
+        </FeatureFlagged>
+    </Grid>
+    <Grid item md={6} xs={12}>
+        <EntityGithubPullRequestsOverviewCard />
+    </Grid>
+
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
+      <Grid item md={4}>
+          <InfoCard title="Rate this entity">
+              <StarredRatingButtons />
+          </InfoCard>
+      </Grid>
   </Grid>
 );
 
@@ -146,11 +209,18 @@ const serviceEntityPage = (
       {overviewContent}
     </EntityLayout.Route>
 
-    <EntityLayout.Route path="/ci-cd" title="CI/CD">
-      {cicdContent}
+    <EntityLayout.Route path="/ci" title="CI">
+      {ciContent}
     </EntityLayout.Route>
 
-    <EntityLayout.Route path="/api" title="API">
+    <EntityLayout.Route path="/cd" title="CD">
+       {cdContent}
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/pull-requests" title="PR's">
+        <EntityGithubPullRequestsContent />
+    </EntityLayout.Route>
+
+      <EntityLayout.Route path="/api" title="API">
       <Grid container spacing={3} alignItems="stretch">
         <Grid item md={6}>
           <EntityProvidedApisCard />
@@ -175,6 +245,26 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
+    <EntityLayout.Route
+        if={isNexusRepositoryManagerExperimentalAvailable}
+        path="/build-artifacts"
+        title="Build Artifacts"
+    >
+        <NexusRepositoryManagerPage />
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/feedback" title="Feedback">
+      <EntityFeedbackResponseContent />
+    </EntityLayout.Route>
+      <FeatureFlagged with="code-insights">
+          <EntityLayout.Route
+              path="/code-insights"
+              title="Code Insights">
+              <EntityGithubInsightsContent />
+          </EntityLayout.Route>
+      </FeatureFlagged>
+      <EntityLayout.Route path="/qeta" title="Q&A">
+          <QetaContent />
+      </EntityLayout.Route>
   </EntityLayout>
 );
 
@@ -184,8 +274,15 @@ const websiteEntityPage = (
       {overviewContent}
     </EntityLayout.Route>
 
-    <EntityLayout.Route path="/ci-cd" title="CI/CD">
-      {cicdContent}
+    <EntityLayout.Route path="/ci" title="CI">
+      {ciContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/cd" title="CD">
+        {cdContent}
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/pull-requests" title="PR's">
+        <EntityGithubPullRequestsContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/dependencies" title="Dependencies">
@@ -202,7 +299,132 @@ const websiteEntityPage = (
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
+      <EntityLayout.Route
+          if={isNexusRepositoryManagerExperimentalAvailable}
+          path="/build-artifacts"
+          title="Build Artifacts"
+      >
+          <NexusRepositoryManagerPage />
+      </EntityLayout.Route>
+      <EntityLayout.Route path="/feedback" title="Feedback">
+          <EntityFeedbackResponseContent />
+      </EntityLayout.Route>
+      <FeatureFlagged with="code-insights">
+          <EntityLayout.Route
+              path="/code-insights"
+              title="Code Insights">
+              <EntityGithubInsightsContent />
+          </EntityLayout.Route>
+      </FeatureFlagged>
+      <EntityLayout.Route path="/qeta" title="Q&A">
+          <QetaContent />
+      </EntityLayout.Route>
   </EntityLayout>
+);
+
+const libraryEntityPage = (
+    <EntityLayout>
+        <EntityLayout.Route path="/" title="Overview">
+            {overviewContent}
+        </EntityLayout.Route>
+
+        <EntityLayout.Route path="/ci" title="CI">
+            {ciContent}
+        </EntityLayout.Route>
+
+        <EntityLayout.Route path="/cd" title="CD">
+            {cdContent}
+        </EntityLayout.Route>
+        <EntityLayout.Route path="/pull-requests" title="PR's">
+            <EntityGithubPullRequestsContent />
+        </EntityLayout.Route>
+
+        <EntityLayout.Route path="/dependencies" title="Dependencies">
+            <Grid container spacing={3} alignItems="stretch">
+                <Grid item md={6}>
+                    <EntityDependsOnComponentsCard variant="gridItem" />
+                </Grid>
+                <Grid item md={6}>
+                    <EntityDependsOnResourcesCard variant="gridItem" />
+                </Grid>
+            </Grid>
+        </EntityLayout.Route>
+
+        <EntityLayout.Route path="/docs" title="Docs">
+            {techdocsContent}
+        </EntityLayout.Route>
+        <EntityLayout.Route
+            if={isNexusRepositoryManagerExperimentalAvailable}
+            path="/build-artifacts"
+            title="Build Artifacts"
+        >
+            <NexusRepositoryManagerPage />
+        </EntityLayout.Route>
+        <EntityLayout.Route path="/feedback" title="Feedback">
+            <EntityFeedbackResponseContent />
+        </EntityLayout.Route>
+        <FeatureFlagged with="code-insights">
+            <EntityLayout.Route
+                path="/code-insights"
+                title="Code Insights">
+                <EntityGithubInsightsContent />
+            </EntityLayout.Route>
+        </FeatureFlagged>
+        <EntityLayout.Route path="/qeta" title="Q&A">
+            <QetaContent />
+        </EntityLayout.Route>
+    </EntityLayout>
+);
+
+const monorepoEntityPage = (
+    <EntityLayout>
+        <EntityLayout.Route path="/" title="Overview">
+            {overviewContent}
+        </EntityLayout.Route>
+
+        <EntityLayout.Route path="/ci" title="CI">
+            {ciContent}
+        </EntityLayout.Route>
+
+        <EntityLayout.Route path="/pull-requests" title="PR's">
+            <EntityGithubPullRequestsContent />
+        </EntityLayout.Route>
+
+        <EntityLayout.Route path="/dependencies" title="Dependencies">
+            <Grid container spacing={3} alignItems="stretch">
+                <Grid item md={6}>
+                    <EntityDependsOnComponentsCard variant="gridItem" />
+                </Grid>
+                <Grid item md={6}>
+                    <EntityDependsOnResourcesCard variant="gridItem" />
+                </Grid>
+            </Grid>
+        </EntityLayout.Route>
+
+        <EntityLayout.Route path="/docs" title="Docs">
+            {techdocsContent}
+        </EntityLayout.Route>
+        <EntityLayout.Route
+            if={isNexusRepositoryManagerExperimentalAvailable}
+            path="/build-artifacts"
+            title="Build Artifacts"
+        >
+            <NexusRepositoryManagerPage />
+        </EntityLayout.Route>
+        <EntityLayout.Route path="/feedback" title="Feedback">
+            <EntityFeedbackResponseContent />
+        </EntityLayout.Route>
+        <FeatureFlagged with="code-insights">
+            <EntityLayout.Route
+                path="/code-insights"
+                title="Code Insights">
+                <EntityGithubInsightsContent />
+            </EntityLayout.Route>
+        </FeatureFlagged>
+        <EntityLayout.Route path="/qeta" title="Q&A">
+            <QetaContent />
+        </EntityLayout.Route>
+    </EntityLayout>
 );
 
 /**
@@ -233,6 +455,14 @@ const componentPage = (
     <EntitySwitch.Case if={isComponentType('website')}>
       {websiteEntityPage}
     </EntitySwitch.Case>
+
+    <EntitySwitch.Case if={isComponentType('library')}>
+          {libraryEntityPage}
+    </EntitySwitch.Case>
+
+      <EntitySwitch.Case if={isComponentType('monorepo')}>
+          {monorepoEntityPage}
+      </EntitySwitch.Case>
 
     <EntitySwitch.Case>{defaultEntityPage}</EntitySwitch.Case>
   </EntitySwitch>
@@ -284,6 +514,9 @@ const userPage = (
         <Grid item xs={12} md={6}>
           <EntityOwnershipCard variant="gridItem" />
         </Grid>
+        <Grid item xs={12}>
+          <EntityStarredRatingsCard />
+        </Grid>
       </Grid>
     </EntityLayout.Route>
   </EntityLayout>
@@ -305,6 +538,9 @@ const groupPage = (
         </Grid>
         <Grid item xs={12} md={6}>
           <EntityLinksCard />
+        </Grid>
+        <Grid item xs={12}>
+          <EntityStarredRatingsCard />
         </Grid>
       </Grid>
     </EntityLayout.Route>
@@ -355,6 +591,9 @@ const systemPage = (
         unidirectional={false}
       />
     </EntityLayout.Route>
+      <EntityLayout.Route path="/qeta" title="Q&A">
+          <QetaContent />
+      </EntityLayout.Route>
   </EntityLayout>
 );
 

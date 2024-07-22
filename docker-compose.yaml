@@ -1,0 +1,35 @@
+version: '3'
+services:
+  db:
+    image: docker.io/bitnami/postgresql:15
+    volumes:
+      - 'db_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_PASSWORD=postgres
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_DATABASE=postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - backstage-network
+  backstage:
+    image: backstage:latest
+    restart: always
+    ports:
+      - "7007:7007"
+    environment:
+      - POSTGRES_SERVICE_HOST=db
+      - POSTGRES_SERVICE_PORT=5432
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=postgres
+    networks:
+      - backstage-network
+networks:
+  backstage-network:
+    driver: bridge
+volumes:
+  db_data:
+    driver: local

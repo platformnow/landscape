@@ -4,6 +4,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
+import BuildIcon from '@material-ui/icons/Build';
 import LogoFull from './LogoFull';
 import LogoIcon from './LogoIcon';
 import {
@@ -25,8 +26,12 @@ import {
 } from '@backstage/core-components';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import { MyGroupsSidebarItem } from '@backstage/plugin-org';
-import GroupIcon from '@material-ui/icons/People';
+import CategoryIcon from '@material-ui/icons/Category';
+import {Administration} from "@janus-idp/backstage-plugin-rbac";
+import { devToolsAdministerPermission } from '@backstage/plugin-devtools-common';
+import { RequirePermission } from '@backstage/plugin-permission-react';
+import LiveHelpIcon from '@material-ui/icons/LiveHelp';
+import {FeatureFlagged} from "@backstage/core-app-api";
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -66,15 +71,12 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       <SidebarDivider />
       <SidebarGroup label="Menu" icon={<MenuIcon />}>
         {/* Global nav, not org-specific */}
-        <SidebarItem icon={HomeIcon} to="catalog" text="Home" />
-        <MyGroupsSidebarItem
-          singularTitle="My Group"
-          pluralTitle="My Groups"
-          icon={GroupIcon}
-        />
+        <SidebarItem icon={HomeIcon} to="/" text="Home" />
+        <SidebarItem icon={CategoryIcon} to="catalog" text="Catalog"/>
         <SidebarItem icon={ExtensionIcon} to="api-docs" text="APIs" />
         <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
         <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
+        <SidebarItem icon={LiveHelpIcon} to="qeta" text="Help" />
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>
@@ -88,7 +90,15 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         icon={<UserSettingsSignInAvatar />}
         to="/settings"
       >
+        <Administration />
         <SidebarSettings />
+        <RequirePermission
+          permission={devToolsAdministerPermission}
+          errorPage={<></>}>
+          <FeatureFlagged with="devtools">
+            <SidebarItem icon={BuildIcon} to="devtools" text="DevTools" />
+          </FeatureFlagged>
+        </RequirePermission>
       </SidebarGroup>
     </Sidebar>
     {children}
